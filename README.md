@@ -1,2 +1,8 @@
 # Groom-Semi-Project-Team2-MVP
-구름 부트캠프 2팀 MVP 프로젝트
+
+- **Language:** Java 21 (LTS)
+- **Framework:** Spring Boot 4.1.0
+- **Build Tool:** Gradle - Groovy
+- **Database:** MySQL
+- **JPA & ORM:** Spring Data JPA
+- **Testing:** JUnit5
