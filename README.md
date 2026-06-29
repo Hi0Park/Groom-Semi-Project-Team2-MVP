@@ -7,7 +7,9 @@
 - **JPA & ORM:** Spring Data JPA
 - **Testing:** JUnit5
 
+### 프로젝트 패키지 구조
 
+```text
 com.shop.buyingmvp (최상위 패키지)
 ├── global                   # 프로젝트 공통 관리 (노현섭 님 메인 작업 영역)
 │   ├── config               # 인프라, 보안, Swagger 등 공통 설정
@@ -42,3 +44,4 @@ com.shop.buyingmvp (최상위 패키지)
 │       └── entity           # 재고 히스토리 엔티티 (StockHistory)
 │
 └── BuyingMvpApplication.java # 메인 스프링부트 실행 클래스
+```
