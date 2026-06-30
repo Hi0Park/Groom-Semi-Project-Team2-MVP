@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Table(name = "products")
+@Table(name = "product")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ProductEntity {
@@ -33,5 +33,6 @@ public class ProductEntity {
     @CreationTimestamp
     private LocalDateTime product_created;
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updated_At;
 }
