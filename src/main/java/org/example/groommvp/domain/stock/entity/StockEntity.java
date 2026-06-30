@@ -21,35 +21,37 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
- * 상품의 현재 재고를 보관하는 엔티티. (ERD: stock)
+ * 상품의 현재 재고를 보관하는 엔티티. (테이블: stocks)
  *
  * <p>상품 1건당 재고 1건(1:1)이며, FK 컬럼은 {@code product_id}.
- * 시간 필드는 프로젝트 컨벤션(Hibernate {@code @CreationTimestamp}/{@code @UpdateTimestamp})을 따른다.
+ *
+ * <p><b>네이밍 컨벤션:</b> 자바 필드는 camelCase, DB 컬럼은 snake_case 로 자동 변환된다.
+ * (Hibernate 기본 물리 네이밍 전략 — 예: {@code createdAt} → 컬럼 {@code created_at})
  */
 @Entity
 @Getter
-@Table(name = "stock")
+@Table(name = "stocks")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StockEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long stock_id;
+    private Long stockId;
 
     /** 재고가 속한 상품 (1:1). */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false, unique = true)
     private ProductEntity product;
 
-    /** 현재 재고 수량. (ERD: stocks) */
+    /** 현재 재고 수량. (컬럼: stocks) */
     @Column(nullable = false)
     private int stocks;
 
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Builder
     public StockEntity(ProductEntity product, int stocks) {
