@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "order_item")
+@Table(name = "order_items")
 public class OrderItem {
 
     @Id
@@ -52,7 +52,7 @@ public class OrderItem {
 
     public OrderItem(Order order, ProductEntity product, int quantity, int orderPrice) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("주문 수량은 1개 이상이어야합니다.");
+            throw new IllegalArgumentException("Order quantity must be greater than or equal to 1.");
         }
         this.order = order;
         this.product = product;
