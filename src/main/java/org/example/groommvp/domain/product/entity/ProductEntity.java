@@ -15,23 +15,40 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_id;
+    private Long productId;
 
-    @NotBlank(message = "제품명을 입력하세요.")
-    @Size(max = 50, message = "제품명은 최대 50자까지 입력 가능합니다.")
-    private String product_name;
+    @Column(nullable = false, length = 50)
+    private String productName;
 
-    @NotNull(message = "제품 가격을 입력하세요.")
-    @Positive(message = "제품 가격은 0보다 커야 합니다.")
-    private  Integer product_price;
+    @Column(nullable = false)
+    private  Integer productPrice;
 
+    @Column(nullable = false)
     @CreationTimestamp
-    private LocalDateTime product_created;
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
     @UpdateTimestamp
-    private LocalDateTime updated_At;
+    private LocalDateTime updatedAt;
+
+    @Builder
+    public ProductEntity(
+            String productName,
+            Integer productPrice
+    ) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
+
+    public void update(
+            String productName,
+            Integer productPrice
+    ) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+    }
 }
