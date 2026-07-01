@@ -33,6 +33,12 @@ public class ProductService {
         );
     }
 
+    @Transactional
+    public void deleteProduct(Long productId) {
+        ProductEntity product = checkProductExists(productId);
+        productRepository.delete(product);
+    }
+
     private ProductEntity checkProductExists(Long productId){
         return productRepository.findById(productId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 제품 없음"));
