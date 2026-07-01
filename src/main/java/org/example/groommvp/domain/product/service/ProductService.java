@@ -3,12 +3,13 @@ package org.example.groommvp.domain.product.service;
 import lombok.RequiredArgsConstructor;
 import org.example.groommvp.domain.product.dto.ProductListResponseDto;
 import org.example.groommvp.domain.product.repository.ProductRepository;
+import org.example.groommvp.global.error.BusinessException;
+import org.example.groommvp.global.error.ErrorCode;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.example.groommvp.domain.product.dto.ProductCreateRequest;
 import org.example.groommvp.domain.product.dto.ProductUpdateRequest;
 import org.example.groommvp.domain.product.entity.ProductEntity;
-import org.example.groommvp.domain.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +44,13 @@ public class ProductService {
         productRepository.delete(product);
     }
 
+    //제품존제를 확인해줌
     private ProductEntity checkProductExists(Long productId){
         return productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 제품 없음"));
+                .orElseThrow(() -> new BusinessException(ErrorCode.PRODUCT_NOT_FOUND));
     }
   
-  public Page<ProductListResponseDto> getProductList(String keyword, Pageable pageable) {
+    public Page<ProductListResponseDto> getProductList(String keyword, Pageable pageable) {
         //검색어가 있으면 검색해서 페이징
         if(keyword != null && !keyword.trim().isEmpty()) {
             return productRepository.findByProductNameContaining(keyword, pageable)
